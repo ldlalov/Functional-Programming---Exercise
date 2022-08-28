@@ -15,10 +15,7 @@ namespace _04._Find_Evens_or_Odds
                 switch (type)
                 {
                     case "even":
-                        if (predicate(i))
-                        {
-                            Console.Write($"{i} ");
-                        }
+                        Console.WriteLine(predicate(i));
                         break;
                     case "odd":
                         if (!predicate(i))
