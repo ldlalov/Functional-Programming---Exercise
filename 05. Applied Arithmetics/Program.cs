@@ -7,18 +7,29 @@ namespace _05._Applied_Arithmetics
     {
         static void Main(string[] args)
         {
+            Func<int, int> addFunk = (x) => x + 1;
+            Func<int, int> multiplyFunk = (x) => x * 2;
+            Func<int, int> subtractFunk = (x) => x - 1;
             int[] numbers = Console.ReadLine().Split().Select(int.Parse).ToArray();
-        }
-        static int Add(int[] numbers)
-        {
-            if (numbers.Length > 0)
+            string command;
+            while ((command = Console.ReadLine()) != "end")
             {
-                for (int i = 0; i < numbers.Length; i++)
+                switch (command)
                 {
-                    return numbers[i]++;
+                    case "add":
+                        numbers = numbers.Select(addFunk).ToArray();
+                        break;
+                    case "multiply":
+                        numbers = numbers.Select(multiplyFunk).ToArray();
+                        break;
+                    case "subtract":
+                        numbers = numbers.Select(subtractFunk).ToArray();
+                        break;
+                    case "print":
+                        Console.WriteLine(String.Join(' ', numbers));
+                        break;
                 }
             }
-                return 0;
         }
     }
 }
