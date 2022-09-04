@@ -16,9 +16,9 @@ namespace _09._Predicate_Party_
             string whatCase = "";
             while ((input = Console.ReadLine()) != "Party!")
             {
-                Predicate<string> StartsWith = name => name.StartsWith(criteria);
-                Predicate<string> EndsWith = name => name.EndsWith(criteria);
-                Predicate<string> Length = name => name.Length == int.Parse(criteria);
+                //Predicate<string> StartsWith = name => name.StartsWith(criteria);
+                //Predicate<string> EndsWith = name => name.EndsWith(criteria);
+                //Predicate<string> Length = name => name.Length == int.Parse(criteria);
 
                 string[] cmd = input.Split();
                 command = cmd[0];
@@ -27,52 +27,17 @@ namespace _09._Predicate_Party_
                 switch (command)
                 {
                     case "Remove":
-                        switch (whatCase)
-                        {
-                            case "StartsWith":
-                                guests.RemoveAll(StartsWith);
-                                    break;
-                            case "EndsWith":
-                                guests.RemoveAll(EndsWith);
-                                    break;
-                            case "Length":
-                                guests.RemoveAll(Length);
-                                    break;
-                        }
+                        guests.RemoveAll(WhatCase(cmd));
                         break;
                     case "Double":
-                        switch (whatCase)
+                        for (int i = 0; i < guests.Count; i++)
                         {
-                            case "StartsWith":
-                                for (int i = 0; i < guests.Count; i++)
-                                {
-                                    if (guests[i].StartsWith(criteria))
-                                    {
-                                        guests.Insert(i, guests[i]);
-                                        i++;
-                                    }
-                                }
-                                break;
-                            case "EndsWith":
-                                for (int i = 0; i < guests.Count; i++)
-                                {
-                                    if (guests[i].EndsWith(criteria))
-                                    {
-                                        guests.Insert(i, guests[i]);
-                                        i++;
-                                    }
-                                }
-                                break;
-                            case "Length":
-                                for (int i = 0; i < guests.Count; i++)
-                                {
-                                    if (guests[i].Length == int.Parse(criteria))
-                                    {
-                                        guests.Insert(i, guests[i]);
-                                        i++;
-                                    }
-                                }
-                                break;
+                            if (guests.FindIndex(i,WhatCase(cmd)) != -1)
+                            {
+                                i = guests.FindIndex(i, WhatCase(cmd));
+                                guests.Insert(i, guests[i]);
+                                i++;
+                            }
                         }
                         break;
                 }
@@ -84,6 +49,24 @@ namespace _09._Predicate_Party_
             else
             {
                 Console.WriteLine("Nobody is going to the party!");
+            }
+        }
+        public static Predicate<string> WhatCase(string[] cmd)
+        {
+            string criteria = cmd[2];
+            switch (cmd[1])
+            {
+                case "StartsWith":
+                    Predicate<string> StartsWith = name => name.StartsWith(criteria);
+                    return StartsWith;
+                case "EndsWith":
+                    Predicate<string> EndsWith = name => name.EndsWith(criteria);
+                    return EndsWith;
+                case "Length":
+                    Predicate<string> Length = name => name.Length == int.Parse(criteria);
+                    return Length;
+                default:
+                    return null;
             }
         }
     }
