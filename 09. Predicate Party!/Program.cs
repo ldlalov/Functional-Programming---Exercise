@@ -16,10 +16,6 @@ namespace _09._Predicate_Party_
             string whatCase = "";
             while ((input = Console.ReadLine()) != "Party!")
             {
-                //Predicate<string> StartsWith = name => name.StartsWith(criteria);
-                //Predicate<string> EndsWith = name => name.EndsWith(criteria);
-                //Predicate<string> Length = name => name.Length == int.Parse(criteria);
-
                 string[] cmd = input.Split();
                 command = cmd[0];
                 whatCase = cmd[1];
