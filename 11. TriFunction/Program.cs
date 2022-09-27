@@ -11,14 +11,7 @@ namespace _11._TriFunction
             int target = int.Parse(Console.ReadLine());
             List<string> names = Console.ReadLine().Split().ToList();
             Func<string, int, bool> checkName = CheckName;
-            foreach (var name in names)
-            {
-                if (checkName(name,target))
-                {
-                    Console.WriteLine(name);
-                    return;
-                }
-            }
+            Console.WriteLine(names.FirstOrDefault(name => checkName(name,target)));
         }
         static bool CheckName(string name,int target)
         {
